@@ -94,11 +94,12 @@ for i in range(x, x+150):
         dates.append('__error__')
         
     result = pd.DataFrame({'headlines': headlines,
-             'summaries': summaries,
-             'categories': categories,
-             'pillars': pillars,
-             'authors': authors,
-             'dates':dates})
+#              'summaries': summaries,
+#              'categories': categories,
+#              'pillars': pillars,
+#              'authors': authors,
+#              'dates':dates
+                          })
 
     result.to_csv('./data/till_{}.csv'.format(x+150), index = False)
 #     except:
