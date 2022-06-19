@@ -102,4 +102,4 @@ for i in range(x, x+150):
 
         result.to_csv('./data/till_{}.csv'.format(x+150), index = False)
     except:
-        pass
+        print('some error happened')
