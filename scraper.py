@@ -40,7 +40,7 @@ driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
 # driver.get('http://nytimes.com')
 # print(driver.title)
-
+urls = pd.read_csv('bloomberg_news_2021_july_2022_june.csv')['0']
 for i in range(x, x+150):
 #     try:
     driver.get(urls[i])
