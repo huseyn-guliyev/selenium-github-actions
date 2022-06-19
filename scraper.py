@@ -93,7 +93,7 @@ urls = pd.read_csv('bloomberg_news_2021_july_2022_june.csv')['0']
 #     except:
 #         dates.append('__error__')
         
-    result = pd.DataFrame({'headlines': urls[0]#headlines,
+result = pd.DataFrame({'headlines': [urls[0]]#headlines,
 #              'summaries': summaries,
 #              'categories': categories,
 #              'pillars': pillars,
@@ -101,6 +101,6 @@ urls = pd.read_csv('bloomberg_news_2021_july_2022_june.csv')['0']
 #              'dates':dates
                           })
 
-    result.to_csv('./data/till_{}.csv'.format(x+150), index = False)
+result.to_csv('./data/till_{}.csv'.format(x+150), index = False)
 #     except:
 #         print('some error happened')
