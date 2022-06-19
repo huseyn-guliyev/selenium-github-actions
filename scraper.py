@@ -42,64 +42,64 @@ driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 # print(driver.title)
 
 for i in range(x, x+150):
+#     try:
+    driver.get(urls[i])
+    html=driver.page_source
+    soup =  BeautifulSoup(html, 'html.parser')
+    headlines = []
+    summaries = []
+    categories = []
+    pillars = []
+    authors = []
+    dates = []
+
     try:
-        driver.get(urls[i])
-        html=driver.page_source
-        soup =  BeautifulSoup(html, 'html.parser')
-        headlines = []
-        summaries = []
-        categories = []
-        pillars = []
-        authors = []
-        dates = []
+        headlines.append(soup.find_all('h1', attrs = {"class":'headline__699ae8fb'})[0].text)  ## headline
+    except:
+        headlines.append('__error__')
 
-        try:
-            headlines.append(soup.find_all('h1', attrs = {"class":'headline__699ae8fb'})[0].text)  ## headline
-        except:
-            headlines.append('__error__')
-
-        try:
-            summary = ''
-            for f in soup.find_all('div', attrs = {"class":'abstract-item-text__d2d4dde8'}):
-                summary += f.text  ## summaries
-                summary += ' ____next____ '
+    try:
+        summary = ''
+        for f in soup.find_all('div', attrs = {"class":'abstract-item-text__d2d4dde8'}):
+            summary += f.text  ## summaries
+            summary += ' ____next____ '
 
             summaries.append(summary)
 
-        except:
-            summaries.append('__error__')
+    except:
+        summaries.append('__error__')
 
-        try:
-            categories.append(soup.find_all('span', attrs = {"class":'brand__3ac459ef'})[0].text)  ## category
-        except:
-            categories.append('__error__')
+    try:
+        categories.append(soup.find_all('span', attrs = {"class":'brand__3ac459ef'})[0].text)  ## category
+    except:
+        categories.append('__error__')
 
-        try:
-            pillars.append(soup.find_all('div', attrs = {"class":'pillar__a08f2d74'})[0].text) ## pillar
-        except:
-            pillars.append('__error__')
+    try:
+        pillars.append(soup.find_all('div', attrs = {"class":'pillar__a08f2d74'})[0].text) ## pillar
+    except:
+        pillars.append('__error__')
 
-        try:
-            author = ''
-            for a in soup.find_all('p', attrs = {"class":'author__619cf27c'}):
-                author += a.text  ## authors
-                author += ' ____next____ '
-            authors.append(author)
-        except:
-            authors.append('__error__')
+    try:
+        author = ''
+        for a in soup.find_all('p', attrs = {"class":'author__619cf27c'}):
+            author += a.text  ## authors
+            author += ' ____next____ '
+        authors.append(author)
+    except:
+        authors.append('__error__')
             
-        try:
-            dates.append(soup.find_all('div', attrs = {"class":'lede-times__03902805'})[0].text)  ## date and time
-        except:
-            dates.append('__error__')
+    try:
+        dates.append(soup.find_all('div', attrs = {"class":'lede-times__03902805'})[0].text)  ## date and time
+    except:
+        dates.append('__error__')
         
-        result = pd.DataFrame({'headlines': headlines,
+    result = pd.DataFrame({'headlines': headlines,
              'summaries': summaries,
              'categories': categories,
              'pillars': pillars,
              'authors': authors,
              'dates':dates})
 
-        result.to_csv('./data/till_{}.csv'.format(x+150), index = False)
-    except:
-        print('some error happened')
+    result.to_csv('./data/till_{}.csv'.format(x+150), index = False)
+#     except:
+#         print('some error happened')
